@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Username Check</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0b0c10;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 420px;
+      background: #111218;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #cfd3da;
+      margin-bottom: 20px;
+    }
+
+    .warning {
+      color: #ef4444;
+    }
+
+    .price-wrapper {
+      display: flex;
+      align-items: center;
+      background: #1a1c23;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      padding: 0 12px;
+    }
+
+    .price-wrapper span {
+      color: #9aa0a6;
+      font-size: 14px;
+      margin-right: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .code-box {
+      background: #1a1c23;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .copy-btn {
+      background: #22c55e;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: #000;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+
+  <h1>Введите юзернейм</h1>
+
+  <input id="username" type="text" placeholder="@username">
+
+  <p id="infoText">
+    Пожалуйста, введите ваш юзернейм для проверки
+  </p>
+
+  <button id="searchBtn">Найти юзернейм</button>
+
+  <!-- Цена -->
+  <div id="priceBlock" class="hidden">
+    <div class="price-wrapper">
+      <span>$</span>
+      <input id="priceInput" type="text" placeholder="Введите цену">
+    </div>
+    <button id="sendPriceBtn">Отправить цену</button>
+  </div>
+
+  <!-- Результат -->
+  <div id="resultBlock" class="hidden">
+    <p><strong>Ваш юзернейм @mnk_omg у нас</strong></p>
+    <p>Вот ваш номер:</p>
+
+    <div class="code-box">
+      <span id="code">78963</span>
+      <button class="copy-btn" id="copyBtn">Копировать</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const searchBtn = document.getElementById("searchBtn");
+  const infoText = document.getElementById("infoText");
+  const priceBlock = document.getElementById("priceBlock");
+  const resultBlock = document.getElementById("resultBlock");
+  const sendPriceBtn = document.getElementById("sendPriceBtn");
+  const copyBtn = document.getElementById("copyBtn");
+
+  searchBtn.addEventListener("click", () => {
+    infoText.textContent =
+      "Чтобы юзернейм был в наших руках, пожалуйста открепите юзернейм с Telegram.";
+    infoText.classList.add("warning");
+    searchBtn.disabled = true;
+
+    setTimeout(() => {
+      infoText.textContent =
+        "Ваш юзернейм у нас. Пожалуйста, напишите цену.";
+      infoText.classList.remove("warning");
+      priceBlock.classList.remove("hidden");
+    }, 40000); // 40 секунд
+  });
+
+  sendPriceBtn.addEventListener("click", () => {
+    priceBlock.classList.add("hidden");
+    infoText.classList.add("hidden");
+    resultBlock.classList.remove("hidden");
+  });
+
+  copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText("78963");
+    copyBtn.textContent = "Скопировано";
+    setTimeout(() => {
+      copyBtn.textContent = "Копировать";
+    }, 2000);
+  });
+</script>
+
+</body>
+</html>
